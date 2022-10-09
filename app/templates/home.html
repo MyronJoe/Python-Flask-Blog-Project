@@ -1,0 +1,43 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+
+    <div class="row mb-2 justify-content-center">
+
+            {% for post in posts.items %}
+
+                <div class="Row shadow-sm border pt-3 px-3 mt-2 holder">
+                <div class="Jomo mr-4">
+                    <div > <img class="rounded-circle border img-fluid" src="{{ url_for('static', filename='profile_pics/' + post.author.image_file) }}"></div>
+                </div>
+                <div class="holder">
+                    <div class="d-flex text-muted justify-content-between border-bottom">
+                         <a href="{{ url_for('user_post', username=post.author.username) }}"> <h6><span><i class="fa fa-user mr-2"></i></span>{{ post.author.username }}</h6> </a>
+                        <div>
+                            <small><span><i class="fa fa-calendar mr-1"></i></span>{{ post.date_posted.strftime('%B-%d-%Y') }}</small>
+                        </div>
+                    </div>
+                    <h3><a href="{{ url_for('post', post_id=post.id) }}">{{ post.title }}</a></h3>
+                    <p class="text-wrap">{{ post.content }} <a href="#">Read more...</a>
+                    </p>
+
+                </div>
+            </div>
+
+            {% endfor %}
+
+        {% for page_num in posts.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
+            {% if page_num %}
+                {% if posts.page == page_num %}
+                <a class="btn btn-info my-3 mx-1" href="{{ url_for('home',page=page_num) }}"> {{ page_num }} </a>
+                {% else %}
+                    <a class="btn btn-outline-info my-3 mx-1" href="{{ url_for('home',page=page_num) }}"> {{ page_num }} </a>
+                {% endif %}
+            {% else %}
+
+            {% endif %}
+        {% endfor %}
+
+    </div>
+
+{% endblock %}
