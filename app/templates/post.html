@@ -1,0 +1,57 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+
+    <div class="row mb-2 justify-content-center">
+                <div class="Row shadow-sm border pt-2 px-1 m-2 holder">
+                <div class="Jomo mr-4">
+                    <div class="img"> <img class="rounded-circle border" src="{{ url_for('static', filename='profile_pics/' + post.author.image_file) }}"></div>
+                </div>
+                <div class="holder">
+                    {% if post.author == current_user %}
+                    <div>
+                        <a class="btn btn-info btn-sm mb-1" href="{{ url_for('update_post', post_id=post.id) }}">Update</a>
+                        <button type="button" class="btn btn-danger mb-1 btn-sm" data-toggle="modal" data-target="#deleteModalCenter">Delete</button>
+{#                        <input type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#exampleModal" value="Delete">#}
+                    </div>
+                    {% endif %}
+                    <h3> {{ post.title }} </h3>
+                    <p class="text-wrap">{{ post.content }} <a href="#">Read more...</a>
+                    </p>
+
+                 <div class="d-flex text-muted justify-content-between border-top py-1">
+                         <a href="{{ url_for('user_post', username=post.author.username) }}"> <h6><span><i class="fa fa-user mr-2"></i></span>{{ post.author.username }}</h6> </a>
+                        <div>
+                            <small><span><i class="fa fa-calendar mr-1"></i></span>{{ post.date_posted.strftime('%B-%d-%Y') }}</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </div>
+
+<!-- Modal -->
+<div class="modal fade" id="deleteModalCenter" tabindex="-1" role="dialog" aria-labelledby="deleteModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="deleteModalLongTitle">Do You want to delete this post?</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
+          <form action="{{ url_for('delete_post', post_id=post.id) }}" method="POST">
+              <input type="submit" class="btn btn-danger" value="Yes">
+          </form>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
+
+
+
+
