@@ -1,31 +1,37 @@
-.Jomo{
+.Jomo {
     height: 9em;
     width: 9em;
 
 }
-.img{
+
+.img {
     height: 120px;
     width: 120px;
     border-radius: 100%;
 }
-.Jomo1{
+
+.Jomo1 {
     height: 7em;
     width: 8.2em;
     background: black;
 
 }
-.img1{
+
+.img1 {
     height: 116px;
     width: 130px;
     background: yellow;
 }
-.Row{
+
+.Row {
     display: flex;
 }
-.holder{
+
+.holder {
     width: 100%;
     box-sizing: border-box;
 }
-.star{
+
+.star {
     font-size: 18px;
 }
