@@ -2,36 +2,35 @@
 
 {% block body %}
 <h3>All Users</h3>
-    {% for user in users %}
-        <div class="border row p-1 my-1 rounded">
-            <p class="col-sm-4">{{ user.username }}</p>
-            <p class="col-sm-4">{{ user.email }}</p>
-            <p class="col-sm-2">ID: {{ user.id }}</p>
-            <button type="button" class="btn btn-danger mb-1 btn-sm col-sm-2" data-toggle="modal" data-target="#deleteModalCenter">Delete</button>
-        </div>
+{% for user in users %}
+<div class="border row p-1 my-1 rounded">
+  <p class="col-sm-4">{{ user.username }}</p>
+  <p class="col-sm-4">{{ user.email }}</p>
+  <p class="col-sm-2">ID: {{ user.id }}</p>
+  <button type="button" class="btn btn-danger mb-1 btn-sm col-sm-2" data-toggle="modal"
+    data-target="#deleteModalCenter">Delete</button>
+</div>
 
+<!-- Modal -->
+<div class="modal fade" id="deleteModalCenter" tabindex="-1" role="dialog" aria-labelledby="deleteModalCenterTitle"
+  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="deleteModalLongTitle">Do You want to delete this post?</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
+        <form action="{{ url_for('delete_users', user_id=user.id) }}" method="POST">
+          <input type="submit" class="btn btn-danger" value="Yes">
+        </form>
 
-
-
-    <!-- Modal -->
-        <div class="modal fade" id="deleteModalCenter" tabindex="-1" role="dialog" aria-labelledby="deleteModalCenterTitle" aria-hidden="true">
-          <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title" id="deleteModalLongTitle">Do You want to delete this post?</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
-                  <form action="{{ url_for('delete_users', user_id=user.id) }}" method="POST">
-                      <input type="submit" class="btn btn-danger" value="Yes">
-                  </form>
-
-              </div>
-            </div>
-          </div>
-        </div>
-    {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
+{% endfor %}
 {% endblock %}
